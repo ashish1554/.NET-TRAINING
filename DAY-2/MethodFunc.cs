@@ -72,7 +72,7 @@ public class Class1
 
 
         Display("Ashish");
-        Dislay("Ashish","Hello")
+        Dislay("Ashish", "Hello");
 
 
     }

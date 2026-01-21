@@ -71,8 +71,5 @@ public class Generic
 		Console.WriteLine("\nContent of the list for string are : ");
 		obj2.Display();
 
-
-
-
 	}
 }

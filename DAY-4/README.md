@@ -101,8 +101,6 @@ int Add(int a, int b)
 
 ---
 
-## Q2.Lambda vs traditional methods
-
 ## Q1.Type safety
 **Answer:**  
 Type safety means we can use only allowed types of data with variable,methods,etc.. it ensures that number is treated like number string is treated like string and ensures they are not mix with each other means like if we declare like string number="123" as we declare it as string so it must be treated like number 123

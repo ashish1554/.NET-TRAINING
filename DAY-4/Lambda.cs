@@ -1,6 +1,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 public class Lambda
 {
     public static void Main(string[] args)
@@ -25,9 +26,12 @@ public class Lambda
         //sorting the collection
 
         List<int> ll = new List<int> { 3, 4, 65, 1, 2, 4, 8 };
-        ll.Sort((a, b) => a.CompareTo(b));
-        
-        foreach(var item in ll)
+        //ll.Sort((a, b) => a.CompareTo(b));
+        ll.Sort();
+
+        Console.WriteLine("Sorted List is : ");
+
+        foreach (var item in ll)
             {
                 Console.Write(item + " ");
             }

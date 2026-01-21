@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 public class Loops
 {
     public static bool Check(int n)

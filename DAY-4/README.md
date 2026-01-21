@@ -103,7 +103,7 @@ int Add(int a, int b)
 
 ## Q1.Type safety
 **Answer:**  
-Type safety means we can use only allowed types of data with variable,methods,etc.. it ensures that number is treated like number string is treated like string and ensures they are not mix with each other means like if we declare like string number="123" as we declare it as string so it must be treated like number 123
+Type safety means we can use only allowed types of data with variable,methods,etc.. it ensures that number is treated like number string is treated like string and ensures they are not mix with each other means like if we declare like string number="123" as we declare it as string so it must be treated like string not a number 123
 
 There are two types:
 
@@ -114,7 +114,9 @@ There are two types:
 
 ## Q2.Performance benefits of generics
 **Answer:**  
-without generics value types are converted into object and object are converted back to the value  this is called boxing and unboxing  it requires extra memory
+One of the best performance benefit is typesafety without generics value types are converted into object and object are converted back to the value  this is called boxing and unboxing  it requires extra memory
 
 generics provides the inherent type casting means we dont need to explicitly  cast the elements after retriving process from the the collections 
+
+using generic it allows us to write methods or classes that can be used multiple times so basically it provides code reusibility like if i want to swap 2 integers and 2 strings so instead of creating 2 different methods i simply create one generic method that works for both so it increace reusibility
 

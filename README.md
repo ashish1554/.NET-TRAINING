@@ -7,3 +7,6 @@ DAY-3 Assignment:https://docs.google.com/document/d/1RTmPYqn57NAhb8mynwXcQA99uKV
 DAY-4 Assignment:Added As Readme in Day-4 Folder
 
 DAY-5 Assignment:Added As Readme in Day-5 Folder
+
+DAY-6 Assignment:Added As Readme in Day-6 Folder
+

@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="Partial/Partial.csproj" />
+  <Project Path="ProceVsOOPs/ProceVsOOPs.csproj" />
+  <Project Path="UserProfile/UserProfile.csproj" />
+</Solution>

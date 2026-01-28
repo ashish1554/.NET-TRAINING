@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="Encapsulation/Encapsulation.csproj" />
+  <Project Path="ExplicitInterface/ExplicitInterface.csproj" Id="b7b83149-6bdf-49b3-a704-684bd531600b" />
+  <Project Path="InterfaceInheritance/InterfaceInheritance.csproj" Id="5cefc0c6-8255-444b-a16b-7d62c40b4197" />
+  <Project Path="notification/notification.csproj" Id="fc63be33-e545-4aab-bdde-570764162a44" />
+</Solution>

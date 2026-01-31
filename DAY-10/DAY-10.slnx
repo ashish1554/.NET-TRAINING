@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="GC/GC.csproj" Id="ac8b77c2-ff9d-4da7-93ec-13822417f3a6" />
+  <Project Path="Idisposable/Idisposable.csproj" Id="8adfcc4a-e509-474b-b239-b29107153b7c" />
+  <Project Path="VendingMachine/VendingMachine.csproj" Id="0776b31b-2f21-4621-ac20-b6e5b5f06a6a" />
+</Solution>

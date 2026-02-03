@@ -187,6 +187,9 @@ public class LinqEx
             Console.Write(item+ " ");
         }
         Console.WriteLine("\n----------------------------------------------------------");
+        //Thoery
+        //here i use .ToList() that immediately execute the query and stores the result in memory
+        //without it if i don use .ToList() then only query defination is created  and execution is deferred
 
         #endregion
 

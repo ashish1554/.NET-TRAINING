@@ -96,7 +96,10 @@ public class LinqEx
             Console.WriteLine(item);
         }
         Console.WriteLine("------------------------------------------------");
-
+        //Theory
+        //Here deferred execution type is used because here methods like GroupBy and Select are not executed immediately
+        //query runs at foreach loop so that it reduced unnecassary work and runs query only if needed
+        //of any modification made then it affect at the iteration in the case of deferred execution
         #endregion
 
         #region TASK-5

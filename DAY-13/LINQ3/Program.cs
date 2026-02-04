@@ -55,6 +55,7 @@ public class LinqEx
         //deferred execution executes the query at the time of iteration not at the time of defination
         //in deferred execution it returns IEnumerable<> type of object
         //in deferred execution change in the query is possible before it runs 
+        //Immediate Execution
         //Immediate execution executes the linq query immediately and returns the actual data at the point it call
         //Immediate execution returns data in forms like arrays and list
         //in immediate execution change in the query is not possible

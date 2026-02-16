@@ -113,5 +113,4 @@ left join Employees e
 on e.DepartmentId=d.DepartmentId
 group by DepartmentName
 
-
 select * from Employees

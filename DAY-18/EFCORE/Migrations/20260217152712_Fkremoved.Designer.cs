@@ -4,6 +4,7 @@ using EFCORE.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EFCORE.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260217152712_Fkremoved")]
+    partial class Fkremoved
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,21 +24,6 @@ namespace EFCORE.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("CourseStudent", b =>
-                {
-                    b.Property<int>("CoursesId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StudentsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CoursesId", "StudentsId");
-
-                    b.HasIndex("StudentsId");
-
-                    b.ToTable("CourseStudent");
-                });
 
             modelBuilder.Entity("EFCORE.Entities.Batch", b =>
                 {
@@ -51,14 +39,9 @@ namespace EFCORE.Migrations
                     b.Property<DateOnly>("StartDate")
                         .HasColumnType("date");
 
-                    b.Property<int>("TrainerId")
-                        .HasColumnType("int");
-
                     b.HasKey("BatchId");
 
                     b.HasIndex("CourseId");
-
-                    b.HasIndex("TrainerId");
 
                     b.ToTable("Batches");
                 });
@@ -135,48 +118,15 @@ namespace EFCORE.Migrations
                     b.ToTable("Trainers");
                 });
 
-            modelBuilder.Entity("CourseStudent", b =>
-                {
-                    b.HasOne("EFCORE.Entities.Course", null)
-                        .WithMany()
-                        .HasForeignKey("CoursesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EFCORE.Entities.Student", null)
-                        .WithMany()
-                        .HasForeignKey("StudentsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("EFCORE.Entities.Batch", b =>
                 {
                     b.HasOne("EFCORE.Entities.Course", "Course")
-                        .WithMany("Batches")
+                        .WithMany()
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("EFCORE.Entities.Trainer", "Trainer")
-                        .WithMany("Batches")
-                        .HasForeignKey("TrainerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Course");
-
-                    b.Navigation("Trainer");
-                });
-
-            modelBuilder.Entity("EFCORE.Entities.Course", b =>
-                {
-                    b.Navigation("Batches");
-                });
-
-            modelBuilder.Entity("EFCORE.Entities.Trainer", b =>
-                {
-                    b.Navigation("Batches");
                 });
 #pragma warning restore 612, 618
         }

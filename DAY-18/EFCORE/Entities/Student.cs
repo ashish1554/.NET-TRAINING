@@ -21,6 +21,6 @@ namespace EFCORE.Entities
   
         public DateTime CreatedAt { get; set; }
 
-        public List<Course> Courses { get; set; } = new List<Course>();
+        public virtual List<Course> Courses { get; set; } = new List<Course>();
     }
 }

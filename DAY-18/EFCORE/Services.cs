@@ -31,7 +31,11 @@ namespace EFCORE
 
             };
             context.Students.Add(student);
+            var entry = context.Entry(student);
+            Console.WriteLine("State :" + entry.State);
             context.SaveChanges();
+            Console.WriteLine("State :" + entry.State);
+
 
         }
 
@@ -51,7 +55,10 @@ namespace EFCORE
             };
 
             context.Courses.Add(course);
+            var entry = context.Entry(course);
+            Console.WriteLine("State :" + entry.State);
             context.SaveChanges();
+            Console.WriteLine("State :" + entry.State);
 
         }
         public  void ShowStudents(AppDbContext context)
@@ -91,7 +98,10 @@ namespace EFCORE
             };
 
             context.Trainers.Add(trainer);
+            var entry = context.Entry(trainer);
+            Console.WriteLine("State :" + entry.State);
             context.SaveChanges();
+            Console.WriteLine("State :" + entry.State);
 
         }
         public  void AddBatch(AppDbContext context)
@@ -114,7 +124,10 @@ namespace EFCORE
             batch.TrainerId = trainer.TrainerId;
 
             context.Batches.Add(batch);
+            var entry = context.Entry(batch);
+            Console.WriteLine("State :" + entry.State);
             context.SaveChanges();
+            Console.WriteLine("State :" + entry.State);
         }
         public  void EnrollStudents(AppDbContext context)
         {
@@ -157,6 +170,251 @@ namespace EFCORE
                 }
             }
         }
+
+
+        public void UpdateStudentEmail(AppDbContext context)
+        {
+            Console.WriteLine("Enter the name of the student you want to update : ");
+            string sname= Console.ReadLine();
+
+            var student=context.Students.FirstOrDefault(s => s.Name==sname);
+
+       
+            Console.WriteLine("Enter the new email of the student: ");
+            string email=Console.ReadLine();
+
+            student.Email = email;
+            var entry = context.Entry(student);
+            Console.WriteLine("State :" +entry.State);
+            context.SaveChanges();
+            Console.WriteLine("State :" +entry.State);
+
+        }
+        public void UpdateStudentName(AppDbContext context)
+        {
+            Console.WriteLine("Enter the name of the student you want to update : ");
+            string sname = Console.ReadLine();
+
+            var student = context.Students.FirstOrDefault(s => s.Name == sname);
+
+            Console.WriteLine("Enter the new name of the student: ");
+            string name = Console.ReadLine();
+            student.Name= name;
+            var entry = context.Entry(student);
+            Console.WriteLine("State :" + entry.State);
+            context.SaveChanges();
+            Console.WriteLine("State :" + entry.State);
+        }
+
+        public void DeleteStudent(AppDbContext context)
+        {
+            ShowStudents(context);
+            Console.WriteLine("Enter the name of the student to delete : ");
+            string name=Console.ReadLine();
+
+            var student = context.Students.FirstOrDefault(s=>s.Name==name);
+
+            context.Students.Remove(student);
+            var entry = context.Entry(student);
+            Console.WriteLine("State :" + entry.State);
+            context.SaveChanges();
+            Console.WriteLine("State :" + entry.State);
+
+
+        }
+
+        public void UpdateTrainerName(AppDbContext context)
+        {
+            Console.WriteLine("Enter the name of the trainer you want to  update");
+            string tname=Console.ReadLine();
+            var trainer=context.Trainers.FirstOrDefault(s=>s.Name==tname);
+
+            Console.WriteLine("Enter the new name of the trainer : ");
+            string name= Console.ReadLine();
+            
+
+            trainer.Name = name;
+            var entry = context.Entry(trainer);
+            Console.WriteLine("State :" + entry.State);
+            context.SaveChanges();
+            Console.WriteLine("State :" + entry.State);
+        }
+        public void UpdateTrainerExperience(AppDbContext context)
+        {
+            Console.WriteLine("Enter the name of the trainer you want to  update");
+            string tname = Console.ReadLine();
+            var trainer = context.Trainers.FirstOrDefault(s => s.Name == tname);
+
+            Console.WriteLine("Enter the new experience of the trainer : ");
+            int exp = int.Parse(Console.ReadLine());
+
+            trainer.Experience = exp;
+            var entry = context.Entry(trainer);
+            Console.WriteLine("State :" + entry.State);
+            context.SaveChanges();
+            Console.WriteLine("State :" + entry.State);
+        }
+
+        public void DeleteTrainer(AppDbContext context)
+        {
+            showTrainer(context);
+            Console.WriteLine("Enter the name of the trainer to delete");
+            string tname= Console.ReadLine();
+
+            var trainer=context.Trainers.FirstOrDefault(t=>t.Name==tname);
+
+            context.Trainers.Remove(trainer);
+            var entry = context.Entry(trainer);
+            Console.WriteLine("State :" + entry.State);
+            context.SaveChanges();
+            Console.WriteLine("State :" + entry.State);
+
+        }
+
+
+        public void UpdateCourseName(AppDbContext context)
+        {
+            Console.WriteLine("Enter the name of the course to update : ");
+            string cname=Console.ReadLine();
+
+            var course = context.Courses.FirstOrDefault(c=>c.TItle==cname);
+            Console.WriteLine("Enter the new name of the course");
+            string name=Console.ReadLine();
+            course.TItle = name;
+            var entry = context.Entry(course);
+            Console.WriteLine("State :" + entry.State);
+            context.SaveChanges();
+            Console.WriteLine("State :" + entry.State);
+
+        }
+
+        public void UpdateCourseFees(AppDbContext context)
+        {
+            Console.WriteLine("Enter the name of the course to update : ");
+            string cname = Console.ReadLine();
+
+            var course = context.Courses.FirstOrDefault(c => c.TItle == cname);
+            Console.WriteLine("Enter the new fees");
+            double fees = double.Parse(Console.ReadLine());
+            course.Fees = fees;
+            var entry = context.Entry(course);
+            Console.WriteLine("State :" + entry.State);
+            context.SaveChanges();
+            Console.WriteLine("State :" + entry.State);
+
+        }
+        public void UpdateCourseDuration(AppDbContext context)
+        {
+            Console.WriteLine("Enter the name of the course to update : ");
+            string cname = Console.ReadLine();
+
+            var course = context.Courses.FirstOrDefault(c => c.TItle == cname);
+            Console.WriteLine("Enter the new  duration in month");
+            int duration = int.Parse(Console.ReadLine());
+            course.DurationInMonths = duration;
+            var entry = context.Entry(course);
+            Console.WriteLine("State :" + entry.State);
+            context.SaveChanges();
+            Console.WriteLine("State :" + entry.State);
+
+        }
+
+        public void DeleteCourse(AppDbContext context)
+        {
+            ShowCourses(context);
+            Console.WriteLine("Enter the name of the course to update : ");
+            string cname = Console.ReadLine();
+
+            var course = context.Courses.FirstOrDefault(c => c.TItle == cname);
+
+            context.Courses.Remove(course);
+            var entry = context.Entry(course);
+            Console.WriteLine("State :" + entry.State);
+            context.SaveChanges();
+            Console.WriteLine("State :" + entry.State);
+
+        }
+
+
+        public void UpdateStudentDetails(AppDbContext context)
+        {
+            ShowStudents(context);
+            Console.WriteLine("Enter 1 to update student name");
+            Console.WriteLine("Enter 2 to update student email");
+            int choice=int.Parse(Console.ReadLine());
+            switch (choice)
+            {
+                case 1:UpdateStudentName(context);
+                    break;
+                case 2:UpdateStudentEmail(context);
+                    break;
+            }
+        }
+        public void UpdateTrainerDetails(AppDbContext context)
+        {
+            showTrainer(context);
+            
+            Console.WriteLine("Enter 1 to update trainer name");
+            Console.WriteLine("Enter 2 to update trainer experience");
+            int choice = int.Parse(Console.ReadLine());
+            switch (choice)
+            {
+                case 1:
+                    UpdateTrainerName(context);
+                    break;
+                case 2:
+                    UpdateTrainerExperience(context);
+                    break;
+            }
+        }
+
+        public void UpdateCourseDetails(AppDbContext context)
+        {
+            ShowCourses(context);
+            Console.WriteLine("Enter 1 to update course name");
+            Console.WriteLine("Enter 2 to update course duration");
+            Console.WriteLine("Enter 3 to update course fees");
+            int choice = int.Parse(Console.ReadLine());
+            switch (choice)
+            {
+                case 1:
+                    UpdateCourseName(context);
+                    break;
+                case 2:
+                    UpdateCourseDuration(context);
+                    break;
+                case 3:
+                    UpdateCourseFees(context);
+                    break;
+            }
+        }
+
+        public void showTrainer(AppDbContext context)
+        {
+            Console.WriteLine("-----------Trainers----------");
+            var trainer=context.Trainers.ToList();
+            foreach (var item in trainer)
+            {
+                Console.WriteLine("Name: "+item.Name+","+"Experience : "+item.Experience);
+            }
+        }
+
+        public void DetachedDemo(AppDbContext context)
+        {
+
+            var student = context.Students.Find(2);
+            var before = context.Entry(student).State;
+            Console.WriteLine(before);
+            context.Entry(student).State = EntityState.Detached;
+            student.Name = "rajesh sigh";
+            Console.WriteLine("After modification state : ");
+            Console.WriteLine(context.Entry(student).State);
+            context.SaveChanges();
+            Console.WriteLine(context.Entry(student).State);
+            var afterstudent = context.Students.Find(2);
+            Console.WriteLine(afterstudent.Name);
+        }
+   
 
         //public void ShowTrainerwithCourses(AppDbContext context)
         //{

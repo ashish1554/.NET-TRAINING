@@ -20,9 +20,9 @@ namespace EFCORE.Entities
         public double Fees { get; set; }
         public int DurationInMonths { get; set; }
      
-        public List<Batch>?Batches { get; set; }
+        public virtual List<Batch>?Batches { get; set; }
 
-        public List<Student> Students { get; set; } = new List<Student>();
+        public virtual List<Student> Students { get; set; } = new List<Student>();
 
     }
 }

@@ -1,5 +1,7 @@
 ﻿using EFCORE.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +16,18 @@ namespace EFCORE.Data
      
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=EFCoreDemo;Trusted_Connection=True;TrustServerCertificate=True;");
+            optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=EFCoreDemo;Trusted_Connection=True;TrustServerCertificate=True;").UseLazyLoadingProxies()
+           .EnableSensitiveDataLogging()
+            .LogTo(message =>
+            {
+                if (EnableSqlLogging)
+                {
+                    Console.WriteLine(message);
+                }
+            },
+        new[] { DbLoggerCategory.Database.Command.Name },
+        LogLevel.Information);
+
         }
 
         public DbSet<Student> Students { get; set; } 
@@ -22,5 +35,6 @@ namespace EFCORE.Data
 
         public DbSet<Batch> Batches { get; set; }
         public DbSet<Trainer> Trainers { get; set; }
-     }
+        public bool EnableSqlLogging { get;  set; }
+    }
 }

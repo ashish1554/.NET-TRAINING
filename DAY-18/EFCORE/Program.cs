@@ -41,7 +41,8 @@ public class EFex
             Console.WriteLine("Enter 13 to show trainer");
             Console.WriteLine("Enter 14 to update course details");
             Console.WriteLine("================================================");
-            Console.WriteLine("Enter 15  for demo of lazy,eager,explicit loading");
+            Console.WriteLine("Enter 15  for demontrasition of detached state");
+            Console.WriteLine("Enter 16  for demo of lazy,eager,explicit loading");
          
 
 
@@ -88,6 +89,9 @@ public class EFex
                     service.UpdateCourseDetails(context);
                     break;
                 case 15:
+                    service.DetachedDemo(context);
+                    break;
+                case 16:
                     ex.LoadingDemo(context);
                     break;
 

@@ -403,16 +403,17 @@ namespace EFCORE
         {
 
             var student = context.Students.Find(2);
+            Console.WriteLine("Name before state is detached : "+student.Name);
             var before = context.Entry(student).State;
-            Console.WriteLine(before);
+            Console.WriteLine("Before Making state Detached : "+before);
             context.Entry(student).State = EntityState.Detached;
             student.Name = "rajesh sigh";
-            Console.WriteLine("After modification state : ");
-            Console.WriteLine(context.Entry(student).State);
+            Console.WriteLine("We modified name after making state detached : "+student.Name);
+            Console.WriteLine("Before save changes state : "+ context.Entry(student).State);
             context.SaveChanges();
-            Console.WriteLine(context.Entry(student).State);
+            Console.WriteLine("After save changes state is : "+context.Entry(student).State);
             var afterstudent = context.Students.Find(2);
-            Console.WriteLine(afterstudent.Name);
+            Console.WriteLine("Name after chnages : "+afterstudent.Name);
         }
    
 

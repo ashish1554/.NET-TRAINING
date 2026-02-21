@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CTMS.Services
 {
-    internal class ReportServices
+    public class ReportServices
     {
     }
 }

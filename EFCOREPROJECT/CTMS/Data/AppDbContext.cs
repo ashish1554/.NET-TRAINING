@@ -21,11 +21,11 @@ namespace CTMS.Data
             base.OnModelCreating(modelBuilder);
         }
 
-        DbSet<Department> Departments { get; set; }
-        DbSet<Employee> Employees { get; set; }
-        DbSet<EmployeeTrainer> EmployeeTrainers { get; set; }
-        DbSet<Enrollment> Enrollments { get; set; }
-        DbSet<TrainingProgram> TrainingPrograms { get; set; }
+        public DbSet<Department> Departments { get; set; }
+        public DbSet<Employee> Employees { get; set; }
+        public DbSet<EmployeeTrainer> EmployeeTrainers { get; set; }
+        public DbSet<Enrollment> Enrollments { get; set; }
+        public DbSet<TrainingProgram> TrainingPrograms { get; set; }
 
 
 

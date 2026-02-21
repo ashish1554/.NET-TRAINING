@@ -13,6 +13,7 @@ public class EFCOREPROJECTAPP
         TrainingProgramService tservice = new TrainingProgramService();
         EmployeeServices eservice = new EmployeeServices();
         EnrollmentService enrservice = new EnrollmentService(); 
+        DepartmentServices dservice=new DepartmentServices();
 
 
 
@@ -39,33 +40,27 @@ public class EFCOREPROJECTAPP
             switch (choice)
             {
                 case 1:
-                    // Create Training Program
                     tservice.CreateTrainingProgram(context);
                     break;
 
                 case 2:
-                    // Register Employee
                     eservice.RegisterEmployee(context);
                     break;
 
                 case 3:
-                    // Enroll Employee in Training
                     enrservice.EnrollEmployeeInTraining(context);
                     break;
 
                 case 4:
-                    // Show Training Details (With Employees)
-                    // trainingProgramService.ShowTrainingDetails();
+                     tservice.ShowTrainingDetails(context);
                     break;
 
                 case 5:
-                    // Show Department Report
-                    // reportService.ShowDepartmentReport();
+                    dservice.DepartmentReport(context);
                     break;
 
                 case 6:
-                    // Update Employee Performance
-                    // employeeService.UpdateEmployeePerformance();
+                    enrservice.UpdateEmployeePerformanceScore(context);
                     break;
 
                 case 7:

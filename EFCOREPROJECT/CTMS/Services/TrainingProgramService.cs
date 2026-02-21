@@ -1,5 +1,6 @@
 ﻿using CTMS.Data;
 using CTMS.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,7 +56,7 @@ namespace CTMS.Services
         public void ShowTrainingPrograms(AppDbContext context)
         {
             var trainingprograms = context.TrainingPrograms.ToList();
-            Console.WriteLine("----------Employee Registration----------");
+            Console.WriteLine("----------Training Programs----------");
 
             foreach (var item in trainingprograms)
             {
@@ -63,6 +64,35 @@ namespace CTMS.Services
             }
             Console.WriteLine("========================================================================");
 
+        }
+
+        public void ShowTrainingDetails(AppDbContext context)
+        {
+            ShowTrainingPrograms(context);
+            Console.WriteLine("Enter the ID of the TrainingProgram you want details:");
+            int id = int.Parse(Console.ReadLine());
+            var training = context.TrainingPrograms.Include(enr=>enr.Enrollments).ThenInclude(emp=>emp.Employee).ThenInclude(dep=>dep.Department).FirstOrDefault(tra=>tra.TrainingProgramId==id);
+
+            if (training.Enrollments.Count() == 0)
+            {
+                Console.WriteLine("No employees enrolled yet.");
+                return;
+            }
+
+
+            var trainer = context.Employees.Find(training.TrainerId);
+            Console.WriteLine("Training : "+training.Title);
+            Console.WriteLine("Trainer : "+trainer.Name);
+            Console.WriteLine("Duration : "+training.Duration+"Days");
+
+            Console.WriteLine("Enrolled Employees:");
+            Console.WriteLine("---------------------------------------------------");
+
+            Console.WriteLine("ID|Name|Department|Score");
+            foreach(var item in training.Enrollments)
+            {
+                Console.WriteLine($"{item.Employee.EmployeeId}|{item.Employee.Name}|{item.Employee.Department.DepName}|{item.PerformanceScore}");
+            }
         }
     }
 }

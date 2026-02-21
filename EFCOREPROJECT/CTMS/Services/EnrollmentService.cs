@@ -78,5 +78,43 @@ namespace CTMS.Services
             }
         }
 
+
+        public void UpdateEmployeePerformanceScore(AppDbContext context)
+        {
+            tservice.ShowTrainingDetails(context);
+
+            Console.WriteLine("Enter the employeeId you want to update the performance score");
+            int empid = int.Parse(Console.ReadLine());
+            bool exists = context.Enrollments.Any(x=>x.EmployeeId==empid);
+
+            if (!exists)
+            {
+                Console.WriteLine("Employee with this Id is not found");
+                return;
+            }
+
+            //Console.WriteLine("Enter the Id of TrainingProgram in which you want to update the employee score ");
+            //int tid = int.Parse(Console.ReadLine());
+
+            //bool texists = context.Enrollments.Any(x => x.TrainingProgramId == tid);
+
+            //if (!texists)
+            //{
+            //    Console.WriteLine("Trainingprogram with this Id is not found");
+            //    return;
+            //}
+
+            Console.WriteLine("Enter the performance score for employee:");
+            int performaceScore=int.Parse(Console.ReadLine());
+
+            var enroll = context.Enrollments.FirstOrDefault(x=>x.EmployeeId==empid && x.TrainingProgramId==tid);
+            enroll.PerformanceScore = performaceScore;
+
+            context.SaveChanges();
+           
+            
+
+
+        }
     }
 }

@@ -15,10 +15,9 @@ public class EFCOREPROJECTAPP
         EnrollmentService enrservice = new EnrollmentService(); 
         DepartmentServices dservice=new DepartmentServices();
 
-
+        
         using AppDbContext context = new AppDbContext();
 
-        //eservice.MakeEmployeeTrainer(context);
 
 
         bool exit = false;
@@ -33,9 +32,13 @@ public class EFCOREPROJECTAPP
             Console.WriteLine("5. Show Department Report");
             Console.WriteLine("6. Update Employee Performance");
             Console.WriteLine("7. Delete Training Program");
-            Console.WriteLine("8. Make Employee Trainer");
+            Console.WriteLine("---------------------------------------------");
+
+            Console.WriteLine("8. Make Employee As Trainer");
             Console.WriteLine("9. Register New Department");
-            Console.WriteLine("10. Exit");
+            Console.WriteLine("10. Display Employee");
+            Console.WriteLine("11. Display Department");
+            Console.WriteLine("12. Exit");
 
 
             Console.Write("Enter your choice: ");
@@ -84,6 +87,12 @@ public class EFCOREPROJECTAPP
                     dservice.MakeDepartment(context);
                     break;
                 case 10:
+                    eservice.ShowEmployee(context);
+                    break;
+                case 11:
+                    dservice.ShowDepartments(context);
+                    break;
+                case 12:
                     Console.WriteLine("Exiting application...");
                     exit = true;
                     break;

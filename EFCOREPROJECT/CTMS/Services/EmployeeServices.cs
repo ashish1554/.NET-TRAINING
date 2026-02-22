@@ -14,7 +14,7 @@ namespace CTMS.Services
         DepartmentServices dservices=new DepartmentServices();
         public void ShowEmployee(AppDbContext context)
         {
-            var employees = context.Employees.Include(d=>d.Department).ToList();
+            var employees = context.Employees.AsNoTracking().Include(d=>d.Department).ToList();
             Console.WriteLine("----------EMPLOYEES----------");
             foreach(var item in employees)
             {
@@ -32,20 +32,28 @@ namespace CTMS.Services
             Console.WriteLine("Enter Employe Id to make trainer : ");
             int empid = int.Parse(Console.ReadLine());
 
-            var employee = context.Employees.Find(empid);
+            var employee = context.Employees.Include(et=>et.EmployeeTrainer).FirstOrDefault(e=>e.EmployeeId==empid);
             if(employee==null)
             {
                 Console.WriteLine("Employee not found");
                 return;
             }
 
-            bool isTrainer = context.EmployeeTrainers.Any(t=>t.EmployeeId==empid);
 
-            if(isTrainer)
+            if(employee.EmployeeTrainer!=null)
             {
                 Console.WriteLine("This employee is already trainer");
                 return;
             }
+
+            //this query is unneccasary first i implemented using this but this requires extra DB call
+            //bool isTrainer = context.EmployeeTrainers.Any(t=>t.EmployeeId==empid);
+
+            //if(isTrainer)
+            //{
+            //    Console.WriteLine("This employee is already trainer");
+            //    return;
+            //}
 
             Console.WriteLine("Enter the Expertise Level : ");
             string exlevel=Console.ReadLine();
@@ -63,7 +71,7 @@ namespace CTMS.Services
 
         public void ShowTrainer(AppDbContext context)
         {
-            var trainers = context.EmployeeTrainers.Include(e => e.Employee).ToList();
+            var trainers = context.EmployeeTrainers.AsNoTracking().Include(e => e.Employee).ToList();
 
             foreach(var item in trainers)
             {

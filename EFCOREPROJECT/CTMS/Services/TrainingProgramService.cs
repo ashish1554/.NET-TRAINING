@@ -66,12 +66,20 @@ namespace CTMS.Services
 
         }
 
-        public void ShowTrainingDetails(AppDbContext context)
+        public void ShowTrainingDetails(AppDbContext context,int id)
         {
-            ShowTrainingPrograms(context);
-            Console.WriteLine("Enter the ID of the TrainingProgram you want details:");
-            int id = int.Parse(Console.ReadLine());
-            var training = context.TrainingPrograms.Include(enr=>enr.Enrollments).ThenInclude(emp=>emp.Employee).ThenInclude(dep=>dep.Department).FirstOrDefault(tra=>tra.TrainingProgramId==id);
+
+            //including trainer with employee here saves one extra db call
+            var training = context.TrainingPrograms.Include(t=>t.Trainer).ThenInclude(e=>e.Employee).Include(enr=>enr.Enrollments).ThenInclude(emp=>emp.Employee).ThenInclude(dep=>dep.Department).FirstOrDefault(tra=>tra.TrainingProgramId==id);
+            //var training = context.TrainingPrograms.Include(t => t.Trainer).Include(enr => enr.Enrollments).ThenInclude(emp => emp.Employee).ThenInclude(dep => dep.Department).FirstOrDefault(tra => tra.TrainingProgramId == id);
+
+
+
+            if (training==null)
+            {
+                Console.WriteLine("Training Program with this Id is not exists");
+                return;
+            }
 
             if (training.Enrollments.Count() == 0)
             {
@@ -80,9 +88,11 @@ namespace CTMS.Services
             }
 
 
-            var trainer = context.Employees.Find(training.TrainerId);
+            //var trainer = context.Employees.Find(training.TrainerId);
             Console.WriteLine("Training : "+training.Title);
-            Console.WriteLine("Trainer : "+trainer.Name);
+            Console.WriteLine("Trainer : "+training.Trainer.Employee.Name);
+            //Console.WriteLine("Trainer : " + trainer.Name);
+
             Console.WriteLine("Duration : "+training.Duration+"Days");
 
             Console.WriteLine("Enrolled Employees:");
@@ -93,6 +103,25 @@ namespace CTMS.Services
             {
                 Console.WriteLine($"{item.Employee.EmployeeId}|{item.Employee.Name}|{item.Employee.Department.DepName}|{item.PerformanceScore}");
             }
+        }
+
+
+        public void DeleteTrainingPrograms(AppDbContext context)
+        {
+            ShowTrainingPrograms(context);
+            Console.WriteLine("Enter the Id of the trainingProgram you want to delete");
+            int id = int.Parse(Console.ReadLine());
+
+            var training = context.TrainingPrograms.Find(id);
+            if(training==null)
+            {
+                Console.WriteLine("Training Program with this id is not found");
+                return;
+            }
+
+            context.TrainingPrograms.Remove(training);
+            context.SaveChanges();
+            Console.WriteLine("TrainingProgram Removed successfully");
         }
     }
 }

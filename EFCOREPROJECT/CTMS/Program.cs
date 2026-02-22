@@ -16,9 +16,11 @@ public class EFCOREPROJECTAPP
         DepartmentServices dservice=new DepartmentServices();
 
 
-
         using AppDbContext context = new AppDbContext();
-        
+
+        //eservice.MakeEmployeeTrainer(context);
+
+
         bool exit = false;
 
         while (!exit)
@@ -31,7 +33,9 @@ public class EFCOREPROJECTAPP
             Console.WriteLine("5. Show Department Report");
             Console.WriteLine("6. Update Employee Performance");
             Console.WriteLine("7. Delete Training Program");
-            Console.WriteLine("8. Exit");
+            Console.WriteLine("8. Make Employee Trainer");
+            Console.WriteLine("9. Register New Department");
+            Console.WriteLine("10. Exit");
 
 
             Console.Write("Enter your choice: ");
@@ -52,8 +56,13 @@ public class EFCOREPROJECTAPP
                     break;
 
                 case 4:
-                     tservice.ShowTrainingDetails(context);
-                    break;
+                    {
+                        tservice.ShowTrainingPrograms(context);
+                        Console.WriteLine("Enter the ID of the TrainingProgram you want details:");
+                        int id = int.Parse(Console.ReadLine());
+                        tservice.ShowTrainingDetails(context, id);
+                        break;
+                    }
 
                 case 5:
                     dservice.DepartmentReport(context);
@@ -64,11 +73,17 @@ public class EFCOREPROJECTAPP
                     break;
 
                 case 7:
-                    // Delete Training Program
-                    // trainingProgramService.DeleteTrainingProgram();
+                    tservice.DeleteTrainingPrograms(context);
                     break;
 
                 case 8:
+                    eservice.MakeEmployeeTrainer(context);
+                    break;
+
+                case 9:
+                    dservice.MakeDepartment(context);
+                    break;
+                case 10:
                     Console.WriteLine("Exiting application...");
                     exit = true;
                     break;

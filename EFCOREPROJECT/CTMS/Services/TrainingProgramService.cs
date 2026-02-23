@@ -55,7 +55,7 @@ namespace CTMS.Services
 
         public void ShowTrainingPrograms(AppDbContext context)
         {
-            var trainingprograms = context.TrainingPrograms.ToList();
+            var trainingprograms = context.TrainingPrograms.AsNoTracking().ToList();
             Console.WriteLine("----------Training Programs----------");
 
             foreach (var item in trainingprograms)
@@ -70,7 +70,7 @@ namespace CTMS.Services
         {
 
             //including trainer with employee here saves one extra db call
-            var training = context.TrainingPrograms.Include(t=>t.Trainer).ThenInclude(e=>e.Employee).Include(enr=>enr.Enrollments).ThenInclude(emp=>emp.Employee).ThenInclude(dep=>dep.Department).FirstOrDefault(tra=>tra.TrainingProgramId==id);
+            var training = context.TrainingPrograms.AsNoTracking().Include(t=>t.Trainer).ThenInclude(e=>e.Employee).Include(enr=>enr.Enrollments).ThenInclude(emp=>emp.Employee).ThenInclude(dep=>dep.Department).FirstOrDefault(tra=>tra.TrainingProgramId==id);
             //var training = context.TrainingPrograms.Include(t => t.Trainer).Include(enr => enr.Enrollments).ThenInclude(emp => emp.Employee).ThenInclude(dep => dep.Department).FirstOrDefault(tra => tra.TrainingProgramId == id);
 
 

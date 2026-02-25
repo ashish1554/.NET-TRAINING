@@ -1,16 +1,22 @@
-﻿using DAY1.Model;
+﻿using DAY1.DTO;
+using DAY1.Model;
 
 namespace DAY1.Interfaces
 {
     public interface IProductServices
     {
-        List<Product> GetAllProducts();
-        Product? GetProductById(int id);
+        List<ProductShowDto> GetAllProducts();
+        ProductShowDto? GetProductById(int id);
 
-        List<Product> GetProductByCategory(string name);
+        List<ProductShowDto> GetProductByCategory(string name);
 
         bool DeleteProductById(int id);
 
-        Product AddProduct(Product product);
+        ProductShowDto AddProduct(CreateProduct product);
+
+        //ProductShowDto UpdateProductById (int id, Product product);
+        ProductShowDto UpdateProductById (int id, CreateProduct product);
+
+
     }
 }

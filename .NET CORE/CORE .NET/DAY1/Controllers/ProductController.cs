@@ -1,4 +1,6 @@
-﻿using DAY1.Interfaces;
+﻿using AutoMapper;
+using DAY1.DTO;
+using DAY1.Interfaces;
 using DAY1.Model;
 using DAY1.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -18,8 +20,9 @@ namespace DAY1.Controllers
         [HttpGet]
         public IActionResult GetAllProducts()
         {
-            var ans = _services.GetAllProducts();
-            return Ok(ans);
+            var product = _services.GetAllProducts();
+
+            return Ok(product);
         }
 
         [HttpGet("category/{name}")]
@@ -38,16 +41,18 @@ namespace DAY1.Controllers
                 return NotFound();
             }
             return Ok(ans);
+          
         }
 
         [HttpPost]
-        public IActionResult AddProduct(Product product)
+        public IActionResult AddProduct(CreateProduct product)
         {
             var ans = _services.AddProduct(product);
-            return Created($"api/Product/{ans.Id}", ans);
+            return Created($"api/Product/{ans.Name}", ans);
         }
 
         [HttpDelete]
+
         public bool DeleteProduct(int id)
         {
             var ans = _services.DeleteProductById(id);
@@ -55,7 +60,13 @@ namespace DAY1.Controllers
         }
 
 
+        [HttpPut]
+        public IActionResult UpdateProductById(int id,CreateProduct product)
+        {
+            var dto=_services.UpdateProductById(id, product);
+            return Ok(dto);
 
-    
+        }
+
     }
 }

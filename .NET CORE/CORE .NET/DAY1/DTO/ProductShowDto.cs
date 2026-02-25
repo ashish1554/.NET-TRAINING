@@ -1,15 +1,17 @@
-﻿using System.Globalization;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace DAY1.Model
+namespace DAY1.DTO
 {
-    public class Product
+    public class ProductShowDto
     {
-        public int Id { get; set; }
+
         public string Name { get; set; } = string.Empty;
+
         public string Category { get; set; } = string.Empty;
+
         public decimal SellPrice { get; set; }
 
-        public decimal CostPrice { get; set; }
         public int Stock { get; set; }
+
     }
 }

@@ -1,7 +1,9 @@
 using DAY1.Data;
 using DAY1.Interfaces;
+using DAY1.Mappings;
 using DAY1.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +23,9 @@ builder.Services.AddDbContext<AppDbContext>(
 //inject dependencies
 builder.Services.AddScoped<IProductServices, ProductServices>();
 
+
+//inject automapper
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 builder.Services.AddSingleton<ISingletonService, SingletonService>();
 builder.Services.AddTransient<ITransientService,TransientService>();

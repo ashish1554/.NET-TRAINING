@@ -10,7 +10,10 @@ namespace DAY1.Mappings
         {
             CreateMap<Product,ProductShowDto>();
             CreateMap<Product,CreateProductDto>().ReverseMap();
-      
+
+            CreateMap<User, UserDto>()
+                .ReverseMap();
+
 
         }
     }

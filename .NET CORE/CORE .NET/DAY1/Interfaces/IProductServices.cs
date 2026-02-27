@@ -12,10 +12,9 @@ namespace DAY1.Interfaces
 
         bool DeleteProductById(int id);
 
-        ProductShowDto AddProduct(CreateProduct product);
+        ProductShowDto AddProduct(CreateProductDto product);
 
-        //ProductShowDto UpdateProductById (int id, Product product);
-        ProductShowDto UpdateProductById (int id, CreateProduct product);
+        ProductShowDto UpdateProductById (int id, CreateProductDto product);
 
 
     }

@@ -3,10 +3,12 @@ using DAY1.DTO;
 using DAY1.Interfaces;
 using DAY1.Model;
 using DAY1.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DAY1.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("/api/[controller]")]
     public class ProductsController : Controller
@@ -17,6 +19,7 @@ namespace DAY1.Controllers
         {
             _services = services;
         }
+        [Authorize(Roles = "Admin,Customer")]
         [HttpGet]
         public IActionResult GetAllProducts()
         {
@@ -25,6 +28,7 @@ namespace DAY1.Controllers
             return Ok(product);
         }
 
+        [Authorize(Roles = "Admin,Customer")]
         [HttpGet("category/{name}")]
         public IActionResult GetProductByCategory(string name)
         {
@@ -32,6 +36,7 @@ namespace DAY1.Controllers
             return Ok(ans);
         }
 
+        [Authorize(Roles = "Admin,Customer")]
         [HttpGet("{id:int}")]
         public IActionResult GetProductById(int id)
         {
@@ -41,17 +46,19 @@ namespace DAY1.Controllers
                 return NotFound();
             }
             return Ok(ans);
-          
+
         }
 
+        [Authorize(Roles = "Admin,Vendor")]
         [HttpPost]
-        public IActionResult AddProduct(CreateProduct product)
+        public IActionResult AddProduct(CreateProductDto product)
         {
             var ans = _services.AddProduct(product);
             return Created($"api/Product/{ans.Name}", ans);
         }
 
-        [HttpDelete]
+        [HttpDelete("{id:int}")]
+        [Authorize(Roles = "Admin")]
 
         public bool DeleteProduct(int id)
         {
@@ -59,13 +66,12 @@ namespace DAY1.Controllers
             return ans;
         }
 
-
+        [Authorize(Roles = "Admin,Vendor")]
         [HttpPut]
-        public IActionResult UpdateProductById(int id,CreateProduct product)
+        public IActionResult UpdateProductById(int id,CreateProductDto product)
         {
             var dto=_services.UpdateProductById(id, product);
             return Ok(dto);
-
         }
 
     }

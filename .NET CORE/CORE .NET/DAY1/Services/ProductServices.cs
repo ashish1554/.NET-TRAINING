@@ -17,7 +17,7 @@ namespace DAY1.Services
             _context= context;
             _mapper = mapper;
         }
-        public ProductShowDto AddProduct(CreateProduct product)
+        public ProductShowDto AddProduct(CreateProductDto product)
         {
             var products = _mapper.Map<Product>(product);
             _context.Products.Add(products);
@@ -59,22 +59,9 @@ namespace DAY1.Services
 
         }
 
-        //public ProductShowDto UpdateProductById(int id,Product pro) 
-        //{
-        //        var product = _context.Products.Find(id);
-        //        product.Name = pro.Name;
-        //        product.Category = pro.Category;   
-        //        product.SellPrice = pro.SellPrice;
-        //        product.CostPrice = pro.CostPrice;
-        //        product.Stock = pro.Stock;
+       
 
-        //     //_context.Products.Update(product);
-        //     _context.SaveChanges();
-        //     var finalDto = _mapper.Map<ProductShowDto>(product);
-        //     return finalDto;
-        //}
-
-        public ProductShowDto UpdateProductById(int id, CreateProduct pro)
+        public ProductShowDto UpdateProductById(int id, CreateProductDto pro)
         {
             
             var product = _context.Products.Find(id);

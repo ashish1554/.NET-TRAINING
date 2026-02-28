@@ -67,10 +67,14 @@ namespace DAY1.Controllers
         }
 
         [Authorize(Roles = "Admin,Vendor")]
-        [HttpPut]
+        [HttpPut("{id:int}")]
         public IActionResult UpdateProductById(int id,CreateProductDto product)
         {
             var dto=_services.UpdateProductById(id, product);
+            if (dto == null)
+            {
+                return NotFound();
+            }
             return Ok(dto);
         }
 

@@ -4,7 +4,9 @@ namespace DAY1.DTO
 {
     public class CreateProductDto
     {
-        [Required(ErrorMessage = "Name field is required")]
+        //[Required(ErrorMessage = "Name field is required")]   
+        [Required] //[ApiController] automatically valid this for me if even i dont use error message
+
         public string Name { get; set; } = string.Empty;
         [Required(ErrorMessage = "Category field is required")]
         public string Category { get; set; } = string.Empty;

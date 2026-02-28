@@ -65,6 +65,10 @@ namespace DAY1.Services
         {
             
             var product = _context.Products.Find(id);
+            if (product == null)
+            {
+                return null;
+            }
             product.Name = pro.Name;
             product.Category = pro.Category;
             product.SellPrice = pro.SellPrice;
